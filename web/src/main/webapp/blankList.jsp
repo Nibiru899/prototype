@@ -38,13 +38,7 @@
                 <input type="submit" value="Удалить">
             </form>
         </td>
-        <td>
-                <form action = "/blanks" method = "post">
-                     <input type="hidden" name="name" value="${blank.getName()}">
-                     <input type="hidden" name="_method" value="delete">
-                     <input type="submit" value="Удалить">
-                </form>
-        </td>
+
     </tr>
 </table>
 <br>

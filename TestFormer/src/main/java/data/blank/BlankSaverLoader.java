@@ -67,17 +67,6 @@ public class BlankSaverLoader {
         file.delete();
     }
 
-    public static Blank addBlank(String name){
-        try {
-            Blank blank = new Blank();
-            blank.setName(name);
-            saveBlank(blank,getHash(name)+".txt");
-            return blank;
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     public static void addBlank(Blank blank)  {
         try {

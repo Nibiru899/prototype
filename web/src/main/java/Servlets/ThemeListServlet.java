@@ -2,8 +2,6 @@ package Servlets;
 
 import data.themes.Theme;
 import data.themes.ThemeController;
-import data.themes.ThemesSaverLoader;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -12,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
 
 public class ThemeListServlet extends HttpServlet {
 

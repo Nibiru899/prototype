@@ -2,9 +2,6 @@ package Servlets;
 
 import data.blank.Blank;
 import data.blank.BlankController;
-import data.themes.Theme;
-import data.themes.ThemeController;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -13,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class BlankListServlet extends HttpServlet {

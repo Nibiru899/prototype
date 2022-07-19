@@ -76,11 +76,6 @@ public class ThemeController {
         ThemesSaverLoader.saveTheme(theme);
     }
 
-    public static void setQuestions(String name, BaseQuestion[] questions){
-        Theme theme = ThemesSaverLoader.getTheme(name);
-        theme.setQuestions(new ArrayList<BaseQuestion>(Arrays.asList(questions)));
-    }
-
     public static void addQuestion(String name) throws IOException {
         Theme theme = ThemesSaverLoader.getTheme(name);
         List<BaseQuestion>  questions = theme.getQuestions();
