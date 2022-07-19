@@ -71,4 +71,15 @@
     <url-pattern>/blank</url-pattern>
   </servlet-mapping>
 
+
+
+  <servlet>
+    <servlet-name>removeServlet</servlet-name>
+    <servlet-class>Servlets.removeFilesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>removeServlet</servlet-name>
+    <url-pattern>/removeAll</url-pattern>
+  </servlet-mapping>
+
 </web-app>

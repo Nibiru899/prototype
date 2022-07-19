@@ -1,7 +1,7 @@
 package Servlets;
 
-import data.themes.Theme;
-import data.themes.ThemeController;
+import data.Theme;
+import controllers.ThemeController;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;

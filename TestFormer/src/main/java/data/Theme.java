@@ -1,7 +1,7 @@
-package data.themes;
+package data;
 
 
-import data.questions.BaseQuestion;
+import data.BaseQuestion;
 
 import java.io.Serializable;
 import java.util.ArrayList;

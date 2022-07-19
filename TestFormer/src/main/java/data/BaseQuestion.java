@@ -1,4 +1,6 @@
-package data.questions;
+package data;
+
+import data.Answer;
 
 import java.io.Serializable;
 import java.util.ArrayList;

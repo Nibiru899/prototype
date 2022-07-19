@@ -1,10 +1,10 @@
 package Servlets;
 
-import data.questions.Answer;
-import data.questions.BaseQuestion;
-import data.themes.Theme;
-import data.themes.ThemeController;
-import data.themes.ThemesSaverLoader;
+import data.Answer;
+import data.BaseQuestion;
+import data.Theme;
+import controllers.ThemeController;
+import fileworkers.ThemesSaverLoader;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -33,10 +33,7 @@ public class QuestionWorkServlet extends HttpServlet {
         String indx = req.getParameter("index");
 
         BaseQuestion question = ThemeController.getQuestion(name, indx);
-        req.setAttribute("question",question);
-        req.setAttribute("themeName",name);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("questionWork.jsp");
-        dispatcher.forward(req,resp);
+        goBack(req,resp,question,name);
     }
 
     @Override
@@ -71,6 +68,10 @@ public class QuestionWorkServlet extends HttpServlet {
         question.setQuestion(quest);
         ThemesSaverLoader.saveTheme(theme);
 
+        goBack(req,resp,question,name);
+    }
+
+    private void goBack(HttpServletRequest req, HttpServletResponse resp, BaseQuestion question, String name) throws ServletException, IOException {
         req.setAttribute("question",question);
         req.setAttribute("themeName",name);
         RequestDispatcher dispatcher = req.getRequestDispatcher("questionWork.jsp");

@@ -1,15 +1,9 @@
-package data.blank;
-
-
-import data.themes.Theme;
-import data.themes.ThemesSaverLoader;
+package data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Blank implements Serializable {
@@ -26,7 +20,6 @@ public class Blank implements Serializable {
         end = LocalDateTime.now().withNano(0).withSecond(0);
         duration = 80;
         themeMap = new HashMap<>();
-
     }
 
     public String getName() {
@@ -36,9 +29,6 @@ public class Blank implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
-
-
 
     public int getDuration() {
         return duration;
@@ -54,14 +44,6 @@ public class Blank implements Serializable {
 
     public void setThemeMap(Map<String, Integer> themeMap) {
         this.themeMap = themeMap;
-    }
-
-    public List<Theme> getThemas(){
-        List<Theme> themes = new ArrayList<>();
-        for (String name : themeMap.keySet()){
-            themes.add(ThemesSaverLoader.getTheme(name));
-        }
-        return themes;
     }
 
     public LocalDateTime getStart() {

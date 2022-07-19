@@ -1,9 +1,10 @@
-package data.themes;
+package controllers;
 
-import data.questions.BaseQuestion;
+import data.BaseQuestion;
+import data.Theme;
+import fileworkers.ThemesSaverLoader;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,7 +27,11 @@ public class ThemeController {
     }
 
     public static boolean isExist(String name){
-        List<String> names = Arrays.asList(getNames());
+        String[] array = getNames();
+        if (array == null){
+            return false;
+        }
+        List<String> names = Arrays.asList(array);
         return names.contains(name);
     }
 

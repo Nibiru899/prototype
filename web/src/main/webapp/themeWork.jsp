@@ -4,7 +4,7 @@
 <html>
 <head>
         <meta charset="UTF-8" />
-        <title>User Info</title>
+        <title>Работа с темой ${theme.getName()} </title>
 </head>
 
 <body>

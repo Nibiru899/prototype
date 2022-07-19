@@ -1,7 +1,7 @@
 package Servlets;
 
-import data.blank.Blank;
-import data.blank.BlankController;
+import data.Blank;
+import controllers.BlankController;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;

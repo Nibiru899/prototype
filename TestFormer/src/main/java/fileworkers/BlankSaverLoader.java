@@ -1,4 +1,6 @@
-package data.blank;
+package fileworkers;
+
+import data.Blank;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 public class BlankSaverLoader {
     static String path = "blanks/";
 
-    public static ArrayList<Blank> getAllBlanks() throws IOException, ClassNotFoundException {
+    public static ArrayList<Blank> getAllBlanks(){
         ArrayList<Blank> result = new ArrayList<>();
         File dir = new File(path);
         if (!dir.exists()){
@@ -55,9 +57,6 @@ public class BlankSaverLoader {
         }
     }
 
-
-
-
     public static Blank getBlank(String name) {
             return loadBlank(getHash(name)+".txt");
     }
@@ -67,15 +66,6 @@ public class BlankSaverLoader {
         file.delete();
     }
 
-
-    public static void addBlank(Blank blank)  {
-        try {
-            saveBlank(blank,getHash(blank.getName())+".txt");
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-
-    }
 
     public static String getHash(String toHash){
         return String.valueOf(toHash.hashCode());

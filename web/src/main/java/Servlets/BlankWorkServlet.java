@@ -1,8 +1,8 @@
 package Servlets;
 
-import data.blank.Blank;
-import data.blank.BlankController;
-import data.themes.ThemeController;
+import data.Blank;
+import controllers.BlankController;
+import controllers.ThemeController;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -39,22 +39,36 @@ public class BlankWorkServlet extends HttpServlet {
         }
         else {
             name= String.valueOf(new Date());
-            blank = BlankController.newBlank(name);
+            blank = new Blank();
+            blank.setName(name);
+            BlankController.saveBlank(blank);
         }
-        req.setAttribute("blank",blank);
-        req.setAttribute("themes",ThemeController.getNames());
-        RequestDispatcher dispatcher = req.getRequestDispatcher("blankWork.jsp");
-        dispatcher.forward(req,resp);
-
+        boolean changed = false;
+        for (String themeName : blank.getThemeMap().keySet()){
+            if (!ThemeController.isExist(themeName)){
+                changed = true;
+                blank.getThemeMap().remove(themeName);
+            }
+        }
+        if (changed){
+            BlankController.delBlank(blank.getName());
+            BlankController.saveBlank(blank);
+        }
+        goBack(req,resp,blank,false);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         resp.setCharacterEncoding("UTF-8");
         String first = req.getParameter("firstName");
+        String second =getStr(req.getParameter("newName"));
+        if (BlankController.isExist(second) && !first.equals(second)){
+            goBack(req,resp,BlankController.getBlank(first),true);
+            return;
+        }
         //В данном контексте нет смысла сохранять старый план
         BlankController.delBlank(first);
-        String second =getStr(req.getParameter("newName"));
+
         String str = req.getParameter("start");
         LocalDateTime start = LocalDateTime.parse(str);
         str = req.getParameter("end");
@@ -78,12 +92,16 @@ public class BlankWorkServlet extends HttpServlet {
         blank.setThemeMap(map);
         BlankController.saveBlank(blank);
 
+        goBack(req,resp,blank,false);
+    }
+
+    private void goBack(HttpServletRequest req, HttpServletResponse resp, Blank blank,boolean exists) throws ServletException, IOException {
         req.setAttribute("blank",blank);
         req.setAttribute("themes",ThemeController.getNames());
+        req.setAttribute("exists",exists);
         RequestDispatcher dispatcher = req.getRequestDispatcher("blankWork.jsp");
         dispatcher.forward(req,resp);
     }
-
 
     private  String getStr(String str) throws UnsupportedEncodingException {
         return new String(str.getBytes("ISO-8859-1"));

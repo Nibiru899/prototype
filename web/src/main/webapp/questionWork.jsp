@@ -3,6 +3,7 @@
 
 <html>
 <head>
+        <title>Работа с вопросом ${question.getQuestion()}</title>
         <script type='text/javascript'>
 
                 function addFields(){
@@ -52,13 +53,12 @@
 <body>
 <form action="/question" method="post">
     Вопрос:
-    <br>
     <input type="text" name="quest" value="${question.getQuestion()}">
     <br>
     <br>
     <br>
     Ответы:
-    <input type="hidden" name="lastIdElement" value="${question.getLastId()}" id = "lastIdElement">
+    <input type="hidden" name="lastIdElement" value="${question.getAnswers().size()}" id = "lastIdElement">
     <input type="hidden" name="prevName" value="${question.getQuestion()}">
     <input type = "hidden" value = "${themeName}" name = "name">
     <input type = "hidden" value = "${question.getIndex()}" name = "index">

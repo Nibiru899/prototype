@@ -7,5 +7,9 @@
 <h2>Hello World!</h2>
 <a href="/themes">Работать с темами</a>
 <a href="/blanks">Работать с планами</a>
+<br>
+<br>
+<br>
+<a href="/removeAll">Удалить все файлы</a>
 </body>
 </html>

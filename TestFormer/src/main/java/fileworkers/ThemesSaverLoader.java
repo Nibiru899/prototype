@@ -1,5 +1,7 @@
-package data.themes;
+package fileworkers;
 
+
+import data.Theme;
 
 import java.io.File;
 import java.io.FileInputStream;

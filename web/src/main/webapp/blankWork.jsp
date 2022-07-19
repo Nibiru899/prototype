@@ -118,11 +118,14 @@
     </script>
 </head>
 <body>
-<h2>Лист планов тестирования</h2>
+<h2>Работа с планом тестирования</h2>
 <form action = "/blank" method="post">
     <input type="hidden" name = "firstName" value="${blank.getName()}">
     Название:
     <input type="text" name = "newName" value="${blank.getName()}">
+    <c:if test = "${exist == true}" >
+              Данное имя темы уже существует
+    </c:if>
     <br>
     Начало:
     <input type="datetime-local" name = "start" value="${blank.getISOStart()}">

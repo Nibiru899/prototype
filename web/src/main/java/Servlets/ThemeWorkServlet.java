@@ -1,8 +1,7 @@
 package Servlets;
 
-import data.themes.Theme;
-import data.themes.ThemeController;
-import data.themes.ThemesSaverLoader;
+import data.Theme;
+import controllers.ThemeController;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -50,9 +49,7 @@ public class ThemeWorkServlet extends HttpServlet {
         ThemeController.delQuestion(name,indx);
 
         Theme theme = ThemeController.getTheme(name);
-        req.setAttribute("theme",theme);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("themeWork.jsp");
-        dispatcher.forward(req,resp);
+        goBack(req,resp,theme,true);
     }
 
     @Override
@@ -62,10 +59,7 @@ public class ThemeWorkServlet extends HttpServlet {
         ThemeController.addQuestion(name);
 
         Theme theme = ThemeController.getTheme(name);
-        req.setAttribute("theme",theme);
-        req.setAttribute("",theme);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("themeWork.jsp");
-        dispatcher.forward(req,resp);
+        goBack(req,resp,theme,true);
     }
 
     @Override
@@ -83,6 +77,10 @@ public class ThemeWorkServlet extends HttpServlet {
         }
 
 
+       goBack(req,resp,theme,cond);
+    }
+
+    private void goBack(HttpServletRequest req, HttpServletResponse resp, Theme theme, boolean cond) throws ServletException, IOException {
         req.setAttribute("theme",theme);
         req.setAttribute("exist",!cond);
         RequestDispatcher dispatcher = req.getRequestDispatcher("themeWork.jsp");
