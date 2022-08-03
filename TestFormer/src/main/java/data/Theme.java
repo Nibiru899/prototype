@@ -1,7 +1,6 @@
 package data;
 
-
-import data.BaseQuestion;
+import data.questions.Question;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,7 +9,7 @@ public class Theme implements Serializable {
 
     private String name;
     private long lastId;
-    private ArrayList<BaseQuestion> questions;
+    private ArrayList<Question> questions;
 
     public Theme(){
         lastId = 0;
@@ -25,11 +24,11 @@ public class Theme implements Serializable {
         this.lastId = lastId;
     }
 
-    public ArrayList<BaseQuestion> getQuestions() {
+    public ArrayList<Question> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(ArrayList<BaseQuestion> questions) {
+    public void setQuestions(ArrayList<Question> questions) {
         this.questions = questions;
     }
 
@@ -41,9 +40,9 @@ public class Theme implements Serializable {
         return name;
     }
 
-    public BaseQuestion getQuestionByIndex(String index){
-        for (BaseQuestion question : questions){
-            if (question.getIndex().equals(index)){
+    public Question getQuestionById(long id){
+        for (Question question : questions){
+            if (question.getId() == id){
                 return question;
             }
         }

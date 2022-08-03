@@ -1,7 +1,6 @@
 package fileworkers;
 
 import data.Blank;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -9,7 +8,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-
 
 public class BlankSaverLoader {
     static String path = "blanks/";
@@ -66,13 +64,8 @@ public class BlankSaverLoader {
         file.delete();
     }
 
-
     public static String getHash(String toHash){
         return String.valueOf(toHash.hashCode());
     }
-
-
-
-
 
 }

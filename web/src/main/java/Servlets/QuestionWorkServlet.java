@@ -1,10 +1,8 @@
 package Servlets;
 
-import data.Answer;
-import data.BaseQuestion;
-import data.Theme;
+import controllers.QuestionController;
+import data.questions.Question;
 import controllers.ThemeController;
-import fileworkers.ThemesSaverLoader;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -30,56 +28,52 @@ public class QuestionWorkServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setCharacterEncoding("UTF-8");
         String name  = req.getParameter("name");
-        String indx = req.getParameter("index");
+        String id = req.getParameter("id");
 
-        BaseQuestion question = ThemeController.getQuestion(name, indx);
+        Question question = ThemeController.getQuestion(name, Long.parseLong(id));
         goBack(req,resp,question,name);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         resp.setCharacterEncoding("UTF-8");
-
+        String type = req.getParameter("type");
         String name  = getStr(req.getParameter("name"));
-        String indx = req.getParameter("index");
-        Theme theme = ThemeController.getTheme(name);
-        BaseQuestion question = theme.getQuestionByIndex(indx);
-        int last = Integer.parseInt(req.getParameter("lastIdElement"));
-        question.getAnswers().clear();
-        for (int i = 0; i < last;i++){
-            String ans = req.getParameter("ans"+i);
-            if (ans!= null){
-                String check = req.getParameter("check"+i);
-                Answer answer = new Answer();
-                answer.setId(i);
-                answer.setAnswer(getStr(ans));
-                answer.setSuccess(check != null);
-                question.getAnswers().add(answer);
+        Question question = null;
+        switch (type){
+            case "base": {
+                question = QuestionController.baseQuestionWork(req);
+                break;
             }
         }
-        //обновление id, чтобы не перегружать сервер
-        for (int i = 0;i<question.getAnswers().size();i++){
-            question.getAnswers().get(i).setId(i);
+        if (question!=null){
+            ThemeController.replaceQuestion(name,question);
         }
-        //
-        question.setLastId(question.getAnswers().size());
-
-        String quest = getStr(req.getParameter("quest"));
-        question.setQuestion(quest);
-        ThemesSaverLoader.saveTheme(theme);
-
         goBack(req,resp,question,name);
     }
 
-    private void goBack(HttpServletRequest req, HttpServletResponse resp, BaseQuestion question, String name) throws ServletException, IOException {
+    /**
+     * Возвращение к редактированию вопроса
+     * @param question - вопрос
+     * @param name - имя темы
+     */
+    private void goBack(HttpServletRequest req, HttpServletResponse resp, Question question, String name) throws ServletException, IOException {
         req.setAttribute("question",question);
         req.setAttribute("themeName",name);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("questionWork.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher(question.getType().jspPath);
         dispatcher.forward(req,resp);
     }
 
-    private  String getStr(String str) throws UnsupportedEncodingException {
-        return new String(str.getBytes("ISO-8859-1"));
+    /**
+     * Костыль! фикс кодировки
+     */
+    private static String getStr(String str){
+        try {
+            return new String(str.getBytes("ISO-8859-1"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 

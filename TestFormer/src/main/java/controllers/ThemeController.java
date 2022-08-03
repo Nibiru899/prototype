@@ -1,6 +1,7 @@
 package controllers;
 
-import data.BaseQuestion;
+import data.questions.Question;
+import data.questions.baseQuestion.BaseQuestion;
 import data.Theme;
 import fileworkers.ThemesSaverLoader;
 
@@ -10,9 +11,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ThemeController {
-
-
-
 
 
     public static String[] getNames() {
@@ -60,35 +58,33 @@ public class ThemeController {
         return questions;
     }
 
-    public static BaseQuestion getQuestion(String name,String index){
-        BaseQuestion[] bc = getAllQuestion(name);
-        for (BaseQuestion question : bc){
-            if (question.getIndex().equals(index)){
+    public static Question getQuestion(String name,long id){
+        Question[] q = getAllQuestion(name);
+        for (Question question : q){
+            if (question.getId() == id){
                 return question;
             }
         }
         return null;
     }
 
-    public static void delQuestion(String name,String index){
+    public static void delQuestion(String name, long id){
         Theme theme = getTheme(name);
-        for (BaseQuestion question : theme.getQuestions()){
-            if (question.getIndex().equals(index)){
-                theme.getQuestions().remove(question);
-                break;
-            }
-        }
+        theme.getQuestions().remove(theme.getQuestionById(id));
         ThemesSaverLoader.saveTheme(theme);
     }
 
-    public static void addQuestion(String name) throws IOException {
-        Theme theme = ThemesSaverLoader.getTheme(name);
-        List<BaseQuestion>  questions = theme.getQuestions();
-        BaseQuestion question = new BaseQuestion();
-        question.setQuestion("Новый вопрос");
-        question.setIndex(String.valueOf(theme.getLastId()));
-        theme.setLastId(theme.getLastId()+1);
-        questions.add(question);
+    public static void addQuestionNoId(String name,Question question){
+        Theme theme = getTheme(name);
+        question.setId(theme.getLastId());
+        theme.getQuestions().add(question);
+        ThemesSaverLoader.saveTheme(theme);
+    }
+
+    public static void replaceQuestion(String name, Question question) {
+        Theme theme = getTheme(name);
+        theme.getQuestions().remove(theme.getQuestionById(question.getId()));
+        theme.getQuestions().add(question);
         ThemesSaverLoader.saveTheme(theme);
     }
 }

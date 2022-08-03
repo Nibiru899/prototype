@@ -1,4 +1,4 @@
-package data;
+package data.questions.baseQuestion;
 
 import java.io.Serializable;
 

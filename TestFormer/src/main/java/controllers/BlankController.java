@@ -1,12 +1,8 @@
 package controllers;
 
-
-
 import data.Blank;
 import fileworkers.BlankSaverLoader;
-
 import java.util.List;
-
 
 public class BlankController {
 
