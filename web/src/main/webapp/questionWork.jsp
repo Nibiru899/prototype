@@ -61,7 +61,7 @@
     <input type="hidden" name="lastIdElement" value="${question.getAnswers().size()}" id = "lastIdElement">
     <input type="hidden" name="prevName" value="${question.getQuestion()}">
     <input type = "hidden" value = "${themeName}" name = "name">
-    <input type = "hidden" value = "${question.getId()}" name = "id">
+    <input type = "hidden" value = "${question.getIndex()}" name = "index">
     <div id = "container">
         <c:forEach items="${question.getAnswers()}" var = "answer">
                 <div id = "div${answer.getId()}">
