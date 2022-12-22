@@ -29,7 +29,7 @@ public class BlankSaverLoader {
         return result;
     }
 
-    private static void saveBlank(Blank blank,String filename) throws IOException {
+    public static void saveBlank(Blank blank, String filename) throws IOException {
         FileOutputStream fos = new FileOutputStream(path + filename);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(blank);
@@ -44,7 +44,7 @@ public class BlankSaverLoader {
         }
     }
 
-    private static Blank loadBlank(String filename){
+    public static Blank loadBlank(String filename){
         try {
             FileInputStream fis = new FileInputStream(path + filename);
             ObjectInputStream ois = new ObjectInputStream(fis);
