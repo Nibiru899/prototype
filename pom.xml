@@ -11,6 +11,7 @@
     <modules>
         <module>web</module>
         <module>TestFormer</module>
+        <module>testing</module>
     </modules>
     <dependencies>
         <dependency>
