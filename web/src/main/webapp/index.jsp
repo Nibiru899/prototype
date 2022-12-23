@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
 </head>
 <body>
-<h2>Hello World!</h2>
+<h2>Вы работаете с прототипом!</h2>
 <a href="/themes">Работать с темами</a>
 <a href="/blanks">Работать с планами</a>
 <br>

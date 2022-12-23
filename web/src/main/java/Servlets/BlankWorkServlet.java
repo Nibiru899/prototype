@@ -43,6 +43,7 @@ public class BlankWorkServlet extends HttpServlet {
             blank.setName(name);
             BlankController.saveBlank(blank);
         }
+        System.out.println("Вызвана работа с планом:" + name);
         boolean changed = false;
         for (String themeName : blank.getThemeMap().keySet()){
             if (!ThemeController.isExist(themeName)){
@@ -59,6 +60,7 @@ public class BlankWorkServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        System.out.println("Запрошено сохранение изменений");
         resp.setCharacterEncoding("UTF-8");
         String first = req.getParameter("firstName");
         String second =getStr(req.getParameter("newName"));

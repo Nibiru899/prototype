@@ -26,6 +26,7 @@ public class ThemeListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setCharacterEncoding("UTF-8");
+        System.out.println("Пользователь запросил имена всех тем");
         String[] themes = ThemeController.getNames();
         req.setAttribute("themes",themes);
         RequestDispatcher dispatcher = req.getRequestDispatcher("themeList.jsp");
@@ -36,6 +37,7 @@ public class ThemeListServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setCharacterEncoding("UTF-8");
         String name = getStr(req.getParameter("name"));
+        System.out.println("Пользователь запроcил удаление темы " + name);
         ThemeController.delTheme(name);
         resp.sendRedirect("/themes");
     }
@@ -44,6 +46,7 @@ public class ThemeListServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         resp.setCharacterEncoding("UTF-8");
         Theme theme = ThemeController.newTheme(getStr(req.getParameter("name")));
+        System.out.println("Пользователь добавление темы " + theme.getName());
         req.setAttribute("theme",theme);
         RequestDispatcher dispatcher = req.getRequestDispatcher("themeWork.jsp");
         dispatcher.forward(req,resp);

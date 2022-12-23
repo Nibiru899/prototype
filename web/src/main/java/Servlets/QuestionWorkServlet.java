@@ -31,7 +31,7 @@ public class QuestionWorkServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         String name  = req.getParameter("name");
         String indx = req.getParameter("index");
-
+        System.out.println("Открыто редактирование вопроса с индексом " + indx + " из темы " + name);
         BaseQuestion question = ThemeController.getQuestion(name, indx);
         goBack(req,resp,question,name);
     }
@@ -39,7 +39,7 @@ public class QuestionWorkServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         resp.setCharacterEncoding("UTF-8");
-
+        System.out.println("Запрошено сохранение изменений");
         String name  = getStr(req.getParameter("name"));
         String indx = req.getParameter("index");
         Theme theme = ThemeController.getTheme(name);

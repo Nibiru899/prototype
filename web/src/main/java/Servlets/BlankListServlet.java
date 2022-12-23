@@ -24,12 +24,12 @@ public class BlankListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("Запрошены все планы тестирования");
         resp.setCharacterEncoding("UTF-8");
         List<Blank> blanks = BlankController.getAllBlanks();
         req.setAttribute("blanks",blanks);
         RequestDispatcher dispatcher = req.getRequestDispatcher("blankList.jsp");
         dispatcher.forward(req,resp);
-
     }
 
     @Override
@@ -37,6 +37,7 @@ public class BlankListServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         String name = getStr(req.getParameter("name"));
         BlankController.delBlank(name);
+        System.out.println("Запрошено удаление плана тестирования с именем " + name);
         resp.sendRedirect("/blanks");
     }
 
